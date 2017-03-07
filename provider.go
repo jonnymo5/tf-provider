@@ -2,10 +2,15 @@ package main
 
 import (
   "github.com/hashicorp/terraform/helper/schema"
+  "github.com/hashicorp/terraform/terraform"
 )
 
-func Provider() *schema.Provider {
+func Provider() terraform.ResourceProvider {
   return &schema.Provider{
+    Schema: map[string]*schema.Schema{},
+    DataSourcesMap: map[string]*schema.Resource{
+      "dummy_data": dataSourceInstanceName(),
+    },
     ResourcesMap: map[string]*schema.Resource{
       "dummy_server": resourceServer(),
     },
